@@ -1,0 +1,22 @@
+export default {
+  colors: {
+    colorbackground: "#f0f0f7",
+    colorprimarylighter: "#9871f5",
+    colorprimarylight: "#916bea",
+    colorprimary: "#8257e5",
+    colorprimarydark: "#774dd6",
+    colorprimarydarker: "#6842c2",
+    colorsecundary: "#04d361",
+    colorsecundarydark: "#04bf58",
+    colortitleinprimary: "#ffffff",
+    colortextinprimary: "#d4c2ff",
+    colortexttitle: "#32264d",
+    colortextcomplement: "#9c98a6",
+    colortextbase: "#6a6180",
+    colorlineinwhite: "#e6e6f0",
+    colorinputbackground: "#f8f8fc",
+    colorbuttontext: "#ffffff",
+    colorboxbase: "#ffffff",
+    colorboxfooter: "#fafafc",
+  },
+};
