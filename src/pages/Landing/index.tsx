@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from "react";
 
 import LandingImg from "../../assets/images/landing.png";
+import StudyIcon from "../../assets/images/icons/study.png";
+import GiveClassesIcon from "../../assets/images/icons/give-classes.png";
+import purpleHeartIcon from "../../assets/images/icons/heart.png";
 
-import styles from "./styles";
+import stylesFunc from "./styles";
 
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Alert, TouchableOpacity } from "react-native";
+import api from "../../services/api";
 
 export default function Landing() {
+  const styles = stylesFunc();
   const [totalConnections, setTotalConnections] = useState(0);
 
   useEffect(() => {
-    // api
-    //   .get("/connections/quantity")
-    //   .then((response) => setTotalConnections(response.data.total));
+    api
+      .get("/connections/quantity")
+      .then((response) => {
+        setTotalConnections(response.data.total);
+        Alert.alert(response.data.total);
+      })
+      .catch((e) => Alert.alert("error", api.getUri()));
   }, []);
 
   // api
@@ -22,32 +31,33 @@ export default function Landing() {
   return (
     <View style={styles.container}>
       <View>
-        <View>
-          <Image source={LandingImg} style={styles.banner} />
-          <Text style={styles.title}>
-            Seja bem-vinde, {"\n"}
-            <Text style={styles.titleBold}>O que deseja fazer?</Text>
-          </Text>
-        </View>
+        <Image source={LandingImg} style={styles.banner} />
+        <Text style={styles.title}>
+          Seja bem-vinde, {"\n"}
+          <Text style={styles.titleBold}>O que deseja fazer?</Text>
+        </Text>
+      </View>
 
-        {/* <Image source={LandingImg} /> */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => Alert.alert("Dar Aula")}>
+          <View style={[styles.buttonsLanding, styles.buttonStudy]}>
+            <Image source={StudyIcon} />
+            <Text style={styles.buttonText}>Estudar</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => Alert.alert("Dar Aula")}>
+          <View style={[styles.buttonsLanding, styles.buttonGiveClasses]}>
+            <Image source={GiveClassesIcon} />
+            <Text style={styles.buttonText}>Dar Aulas</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
 
-        {/* <View >
-          <Link to="/classes" className="study">
-            <img src={studyIcon} alt="Estudar" />
-            Estudar
-          </Link>
-          <Link to="/createclass" className="give-classes">
-            <img src={giveClassesIcon} alt="Dar Aulas" />
-            Dar Aulas
-          </Link>
-        </View>
-
-        <span className="total-connections">
+      <View>
+        <Text style={styles.connections}>
           Total de {totalConnections} conexões realizadas.{" "}
-          <img src={purpleHeartIcon} alt="Coração Roxo" />
-        </span>
-      </View> */}
+          <Image source={purpleHeartIcon} />
+        </Text>
       </View>
     </View>
   );
